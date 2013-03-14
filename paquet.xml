@@ -1,0 +1,21 @@
+<paquet
+	prefix="7concepts"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/7concepts-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2013-03-14 15:35:17
+	-->
+
+	<nom>7concepts</nom>
+
+	<auteur lien='http://mychacra.net/'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+</paquet>
