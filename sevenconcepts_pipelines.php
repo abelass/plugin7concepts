@@ -11,7 +11,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+/*Charger les valeurs de champs extras*/
 function sevenconcepts_formulaire_charger($flux){
     $form=$flux['args']['form'];
     if($form=='inscription'){
@@ -27,7 +27,8 @@ function sevenconcepts_formulaire_charger($flux){
     
     return $flux;
 }
-    
+
+/*Vérifier les champs extras obligatoires*/
 function sevenconcepts_formulaire_verifier($flux){
     $form=$flux['args']['form'];
     if($form=='inscription'){
@@ -43,7 +44,7 @@ function sevenconcepts_formulaire_verifier($flux){
     return $flux;
 }
 
-/*Insert les champs extras*/
+/*Insert les champs extras - fait en amont pour pouvoir les reprendre dans l'envoi du mail de confirmation*/
 function sevenconcepts_pre_insertion($flux){
    if ($flux['args']['table']=='spip_auteurs'){
        include_spip('cextras_pipelines');
@@ -56,7 +57,7 @@ function sevenconcepts_pre_insertion($flux){
 return $flux;
 }
 
-
+/*Modifier le nom */
 function sevenconcepts_formulaire_traiter($flux){
     $form=$flux['args']['form'];
     
