@@ -21,5 +21,6 @@
 
 	
 	<necessite nom="notifications" compatibilite="[3.0.8;[" />	
+	<necessite nom="cextras" compatibilite="[3.2.4;[" />		
 
 </paquet>
