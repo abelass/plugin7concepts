@@ -43,21 +43,27 @@ function sevenconcepts_formulaire_verifier($flux){
     return $flux;
 }
 
+/*Insert les champs extras*/
+function sevenconcepts_pre_insertion($flux){
+   if ($flux['args']['table']=='spip_auteurs'){
+       include_spip('cextras_pipelines');
+       $champs_extras=champs_extras_objet(table_objet_sql('auteur'));
+       foreach($champs_extras as $value){
+           $flux['data'][$value['options']['nom']]=_request($value['options']['nom']); 
+            }
+       $flux['data']['name']=_request('nom_inscription');       
+        }
+return $flux;
+}
 
 
 function sevenconcepts_formulaire_traiter($flux){
     $form=$flux['args']['form'];
     
     if($form=='inscription'){
-       $valeurs=array();
-       $id_auteur=$flux['data']['id_auteur'];
-       include_spip('cextras_pipelines');
-       $champs_extras=champs_extras_objet(table_objet_sql('auteur'));
-       foreach($champs_extras as $value){
-           $valeurs[$value['options']['nom']]=_request($value['options']['nom']); 
-       }
+
        $valeurs['nom']=_request('nom_inscription').' '._request('surname');
-       $valeurs['name']=_request('nom_inscription');  
+
        sql_updateq('spip_auteurs',$valeurs,'email='.sql_quote(_request('mail_inscription'))); 
        
     }

@@ -19,4 +19,7 @@
 	<pipeline nom="formulaire_traiter" inclure="sevenconcepts_pipelines.php" /> 
 	<pipeline nom="pre_insertion" inclure="sevenconcepts_pipelines.php" /> 
 
+	
+	<necessite nom="notifications" compatibilite="[3.0.8;[" />	
+
 </paquet>
