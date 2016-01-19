@@ -4090,3 +4090,7 @@ UL.forum LI{
 	background-color:#FFF;
 	padding:0 20px 10px 20px;
 }
+
+#home-member-block input.forml,#home-member-blockinput.formo,#home-member-block input.text,.home-member-block input.password {
+	width:90%
+}

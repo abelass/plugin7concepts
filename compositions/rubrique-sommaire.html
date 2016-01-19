@@ -11,7 +11,7 @@
 	            <!-- Elastislide Carousel -->
 				<ul id="carousel-home" class="elastislide-list">
 	            <BOUCLE_rubProduits (RUBRIQUES){id_parent=#GET{rubProd}}{par num titre}{lang}>#TITRE
-					<li><a href="#URL_RUBRIQUE">#TITRE</a>
+					<li>
 					<BOUCLE_ListeImages2(DOCUMENTS){id_rubrique}{extension==jpg|png}{par num titre}{0,1}>
 		      		[ <a href="#URL_RUBRIQUE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>]
 		      		 </BOUCLE_ListeImages2>
@@ -27,16 +27,19 @@
 			</div>	
 			
 		</section>
-				    <a href="#GET{products}" id="home_cta" class="button cta large"><:button_discover:></a>
+
 	</div>
 	
 	[<!--login-form-->
 	(#SESSION{id_auteur}|non)
+		[(#ENV{logout}|non)
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("a.login").trigger("click");
+			});
+		</script>
+		]
 	<INCLURE{fond=inc/sidebar-not-logge}{env}{lang}{id_rubrique}>
 	<INCLURE{fond=inc/login}{env}{lang}>
-	]
 	
-	[<!--login-ok-->
-	(#SESSION{id_auteur}|oui)
-	<INCLURE{fond=inc/sidebar-logge}{env}{lang}>
 	]

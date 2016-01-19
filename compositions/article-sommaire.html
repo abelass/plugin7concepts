@@ -1,0 +1,17 @@
+
+	<div id="principal" class="inscription">
+		<section id="content">
+		
+			[(#INCLURE{fond=inc/submenu}{id_rubrique})]
+			
+			<div id="contenu">
+			<div class="sidebar"></div>
+[<div class="ajax">(#LOGIN_PUBLIC{#URL_RUBRIQUE{58}})</div>]
+			</div>
+		</section>
+	</div>
+	
+	[<!--login-form-->
+	(#SESSION{id_auteur}|non)
+	<INCLURE{fond=inc/login}{env}{lang}>
+	]

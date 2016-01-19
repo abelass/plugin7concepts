@@ -1,6 +1,6 @@
 
 	<ul class="pull-left">
-		[(#SESSION{id_auteur}|oui)<li><a href="#URL_LOGOUT{spip.php?rubrique3}" class="button button_small logout"><span>Logout</span></a></li>]
+		[(#SESSION{id_auteur}|oui)<li><a href="[(#URL_LOGOUT{#URL_RUBRIQUE{3}|parametre_url{logout,oui}})]" class="button button_small logout"><span>Logout</span></a></li>]
 		[(#SESSION{id_auteur}|non)<li><a href="#form_login" class="button button_small login fancybox"><span>Login</span></a></li>]
 	</ul>
 	
@@ -9,4 +9,4 @@
 	<INCLURE{fond=inc/menu_langues,env}/></li>
 	</ul>
 	<br />
-	[(#SESSION{id_auteur}|oui)<a href="http://www.7concepts.net/en/client-area-58/?lang=en" id="member_name"><span class="user-icon"></span><span class="name">#SESSION{name}&nbsp;#SESSION{surname}</span>, #SESSION{company}</a>]
+	[(#SESSION{id_auteur}|oui)<a href="#URL_RUBRIQUE{58}" id="member_name"><span class="user-icon"></span><span class="name">#SESSION{name}&nbsp;#SESSION{surname}</span>, #SESSION{company}</a>]
