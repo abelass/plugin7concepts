@@ -1,20 +1,13 @@
 <ul id="submenu">
- 					<BOUCLE_environ(RUBRIQUES){id_rubrique}>
-					<BOUCLE_test(CONDITION){si #EXPOSE}>
-					
-						<li[ class="(#ID_RUBRIQUE|=={58}|?{active,''})"]><a href="#URL_RUBRIQUE{58}">Dashboard</a></li>
-						
-					<BOUCLE_clientMenu(RUBRIQUES){id_rubrique=#ID_PARENT}>
-				        <BOUCLE_menu(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
-									<li[ class="(#EXPOSE{active})"]><a href="#URL_RUBRIQUE">#TITRE</a><br /></li>
-							
-						</BOUCLE_menu>	
-					</BOUCLE_clientMenu>
-							
-					</BOUCLE_test>
-					</BOUCLE_environ>	
-							
-				
-					
-					
-					</ul>
+<BOUCLE_environ(RUBRIQUES){id_rubrique}>
+	<BOUCLE_test(CONDITION){si #EXPOSE}>
+		<li[ class="(#ID_RUBRIQUE|=={58}|?{active,''})"]><a href="#URL_RUBRIQUE{58}">Dashboard</a></li>
+		
+	<BOUCLE_clientMenu(RUBRIQUES){id_rubrique=#ID_PARENT}>
+		<BOUCLE_menu(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+			<li[ class="(#EXPOSE{active})"]><a href="#URL_RUBRIQUE">#TITRE</a><br /></li>
+		</BOUCLE_menu>	
+	</BOUCLE_clientMenu>
+	</BOUCLE_test>
+</BOUCLE_environ>	
+</ul>
