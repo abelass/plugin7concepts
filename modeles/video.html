@@ -1,0 +1,35 @@
+<BOUCLE_doc (DOCUMENTS) {id_document=#ENV{video}} {tout}>
+	[(#REM)
+	Affiche la video dans le player Flash
+	]
+
+	<a href="#video_container" class="fancybox video_link"><:regarder_video:></a>  
+  	<div id="video_block">
+  	<!-- Begin VideoJS -->
+	  <div id="video_container" class="video-js-box vim-css">
+	    <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+	    <video id="example_video_1" class="video-js" width="640" height="264" controls="controls" preload="auto" poster="[(#LOGO_DOCUMENT||extraire_attribut{'src'})]">
+	      <source src="[(#URL_DOCUMENT|url_absolue)]" type='video/mp4' codecs="avc1.42E01E, mp4a.40.2" />
+	      <!-- Flash Fallback. Use any flash video player here. Make sure to keep the vjs-flash-fallback class. -->
+	      <object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="264" type="application/x-shockwave-flash"
+	        data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">
+	        <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+	        <param name="allowfullscreen" value="true" />
+	        <param name="flashvars" value='config={"playlist":["http://video-js.zencoder.com/oceans-clip.png", {"url": "[(#URL_DOCUMENT|url_absolue)]","autoPlay":false,"autoBuffering":true}]}' />
+	        <!-- Image Fallback. Typically the same as the poster image. -->
+	        <img src="[(#LOGO_DOCUMENT||extraire_attribut{'src'})]" width="640" height="264" alt="Poster Image"
+	          title="No video playback capabilities." />
+	      </object>
+	    </video>
+	    <!-- Download links provided for devices that can't play video in the browser. -->
+	    <p class="vjs-no-video"><strong>Download Video:</strong>
+	      <a href="http://video-js.zencoder.com/oceans-clip.mp4">MP4</a>,
+	      <a href="http://video-js.zencoder.com/oceans-clip.webm">WebM</a>,
+	      <a href="http://video-js.zencoder.com/oceans-clip.ogv">Ogg</a><br>
+	      <!-- Support VideoJS by keeping this link. -->
+	      <a href="http://videojs.com">HTML5 Video Player</a> by VideoJS
+	    </p>
+	  </div>
+	  <!-- End VideoJS -->
+  	</div>
+</BOUCLE_doc>

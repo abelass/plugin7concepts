@@ -1,0 +1,49 @@
+[(#INCLURE{fond=inc/head})]
+<body id="sitemap">
+
+<div id="wrap">
+
+	[(#INCLURE{fond=inc/header})]
+	
+	<div id="principal">
+		<section id="content">
+			<!-- Articles trouves -->
+			<article class="article-normal">
+			<header>
+			<h1><:plan:></h1>
+			</header>		
+			<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+			<h2><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h2>
+			<!-- Articles et sous-rubriques -->
+			<B_articles_racine>
+			<ul>
+				<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+				<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_articles_racine>
+			</ul>
+			</B_articles_racine>
+
+			<B_rubriques>
+				<ul>
+					<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{id_rubrique!=47}>
+
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+						<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+					</li>
+					</BOUCLE_rubriques>
+				</ul>
+</B_rubriques>
+		</BOUCLE_secteurs>
+			</article>
+		</section>
+    	<aside>
+    		[(#INCLURE{fond=inc/sidebar}{lang})]
+    	</aside>
+	</div>
+
+</div>
+
+[(#INCLURE{fond=inc/footer})]
+
+</body>
+</html>

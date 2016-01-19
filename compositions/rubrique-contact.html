@@ -1,0 +1,49 @@
+	<div id="principal" class="contact">
+		<section id="content">
+		
+			[(#INCLURE{fond=inc/submenu}{id_rubrique})]
+			
+		    
+			<div class="simpleTabs">	
+				<div class="tabs">	
+					<ul class="no-cat clearfix">
+						<li>
+							<ul class="simpleTabsNavigation">
+							<BOUCLE_afficheTabs(ARTICLES){id_rubrique}{par num titre}{lang}><li><a href="#" data-toggle="tab" data-target="#article#ID_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+		</BOUCLE_afficheTabs>
+							</ul>
+						</li>
+					</ul>	
+					<b class="mobile_expand products_expand"></b>
+				
+				</div>
+								
+				
+				<div class="tab-content">
+				<BOUCLE_afficheArt(ARTICLES){id_rubrique}{par num titre}{lang}>
+				
+					<div class="simpleTabsContent tab-pane" id="article#ID_ARTICLE">
+						<article class="article-normal">
+							   <header>
+				              <h1>[(#TITRE|supprimer_numero)]</h1>
+				              <BOUCLEn(MOTS){id_article}{id_mot=4}><span class="new">#TITRE</span></BOUCLEn>
+				              <!--<BOUCLE_new(MOTS){id_groupe=2}{id_article}><span class="new">#TITRE</span></BOUCLE_new>-->
+				              [<h2>(#SOUSTITRE)</h2>]
+				              </header>
+				              [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+				              
+					               
+						  
+			            </article>
+		           </div>
+				</BOUCLE_afficheArt>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+	[<!--login-form-->
+	(#SESSION{id_auteur}|non)
+	<INCLURE{fond=inc/login}{env}{lang}>
+	]
+	

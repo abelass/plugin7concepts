@@ -1,0 +1,29 @@
+<BOUCLE_rubriqueClient(RUBRIQUES){id_rubrique}> 
+
+<BOUCLE_rubC(RUBRIQUES){id_rubrique}>
+[(#INCLURE{fond=inc/head}{id_rubrique})]
+<body id="[(#ID_RUBRIQUE|=={3}|?{homepage,[(#ID_RUBRIQUE|=={4}|?{homepage,section})]})]">
+
+<div id="wrap">
+
+	[(#INCLURE{fond=inc/header}{id_rubrique}{env})]
+	
+	[(#INCLURE{fond=compositions/rubrique[-(#COMPOSITION)]}{id_rubrique}{lang}{env})]
+
+</div>
+[(#INCLURE{fond=inc/footer}{id_rubrique}{lang})]
+
+</body>
+</html>
+
+</BOUCLE_rubC>
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''}) 
+<INCLURE{fond=inc/rubrique-login}{id_rubrique}{lang}{env}>
+]
+<//B_rubC>
+
+	
+</BOUCLE_rubriqueClient>
+
+
+

@@ -1,0 +1,6 @@
+<BOUCLE_doc (DOCUMENTS) {id_document=#ENV{pdf}} {tout}>
+
+[(#REM)
+	Affiche un style propre aux doc pdf (ou autre)	]
+<a href="[(#URL_DOCUMENT|url_absolue)]" class="button pdf clearfix" target="_blank"><span>#ENV{text}</span></a>
+</BOUCLE_doc>

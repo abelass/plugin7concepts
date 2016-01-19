@@ -1,0 +1,24 @@
+	[(#ENV{lang}|=={en}|oui)#SET{zone,1}]
+	[(#ENV{lang}|=={fr}|oui)#SET{zone,2}]
+	
+	<ul>
+	<BOUCLE_environHome(RUBRIQUES){id_rubrique}>
+	<BOUCLE_exclureAreaH(RUBRIQUES){par num titre}{inverse}{0,1}{doublons}></BOUCLE_exclureAreaH>
+	<B_ancetresHome>
+	<BOUCLE_ancetresHome(RUBRIQUES){id_parent=#GET{zone}}{par num titre}{doublons}{0,1}>
+	[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
+	</BOUCLE_ancetresHome>
+	</B_ancetresHome>
+	</BOUCLE_environHome>
+	[(#SESSION{id_auteur}|oui)[(#INCLURE{fond=inc/client-menu-btn}{id_rubrique}{session}{lang})]]
+	
+	
+	<BOUCLE_environ(RUBRIQUES){id_rubrique}>
+	<BOUCLE_exclureArea(RUBRIQUES){par num titre}{id_rubrique=58}{doublons}></BOUCLE_exclureArea>
+	<BOUCLE_exclureArea2(RUBRIQUES){par num titre}{inverse}{0,1}{doublons}></BOUCLE_exclureArea2>
+	<B_ancetres>
+	<BOUCLE_ancetres(RUBRIQUES){id_parent=#GET{zone}}{par num titre}{doublons}>
+	[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
+	</BOUCLE_ancetres>
+	</B_ancetres>
+	</BOUCLE_environ></ul>

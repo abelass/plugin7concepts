@@ -1,0 +1,23 @@
+		<BOUCLE_afficheGal(ARTICLES){id_rubrique ?}{id_article ?}{par num titre}{lang}>
+        	<article class="article-galerie" id="article#ID_ARTICLE">
+            <header>
+              <h1>[(#TITRE|supprimer_numero)]</h1>
+              [<h2>(#SOUSTITRE)</h2>]
+            </header>
+              
+            [(#CHAPO||inserer_attribut{'class','chapeau'})]
+            
+            [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+              
+              <B_ListeImages>
+              <BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{doublons}>
+                  <a href="[(#FICHIER)]" rel="gallery-#ID_ARTICLE" class="fancybox"><img src="[(#FICHIER|image_masque{masque.png}|extraire_attribut{'src'})]" alt="#TITRE" class="onglet1" /></a>
+              </BOUCLE_ListeImages>
+              <div class="clear"> </div>
+              </B_ListeImages>
+              <footer>
+              [<div class="note">(#NOTES)</div>]
+              </footer>
+
+            </article>
+		</BOUCLE_afficheGal>

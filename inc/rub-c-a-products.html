@@ -1,0 +1,119 @@
+<BOUCLE_exclure(ARTICLES){id_mot=5}{doublons}></BOUCLE_exclure>
+<section id="content" class="c-a-products">
+		
+			[(#INCLURE{fond=inc/submenu_client_product}{id_rubrique})]
+			
+		    
+			<div class="simpleTabs">	
+					
+				#SET{mes_articles, #ARRAY}
+			    <div class="tabs"> 	           	
+		            	<BOUCLE_environ(RUBRIQUES){id_rubrique}>#SET{rub,#TITRE}
+		            		
+			            	<BOUCLE_Arr(RUBRIQUES){id_rubrique=#ID_PARENT}>
+								<BOUCLE_test(CONDITION){si #EXPOSE}>
+								
+									<B_ssm>			
+										<BOUCLE_ssm(RUBRIQUES){branche}{par num titre}{titre like %#GET{rub}%}>
+											#SET{mes_articles, #GET{mes_articles}|push{#ID_RUBRIQUE}}
+										</BOUCLE_ssm>
+									</B_ssm>
+								</BOUCLE_test>
+							</BOUCLE_Arr>
+						</BOUCLE_environ>
+						<ul class="by-cat">
+						<BOUCLE_cats(MOTS){id_groupe=3}>
+								<li><span class="open-title">#TITRE<span class="caret"></span></span>
+								<B_AfficherTabs>
+									<ul class="simpleTabsNavigation">
+										<BOUCLE_AfficherTabs(ARTICLES){id_rubrique IN #GET{mes_articles}}{id_mot=#ID_MOT}{par date}{inverse}{id_rubrique!=58}{id_rubrique!=75}{id_rubrique!=76}{id_rubrique!=77}>
+						            		<li><a data-toggle="tab" href="#article#ID_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+						            	</BOUCLE_AfficherTabs>
+					            	</ul>
+								</B_AfficherTabs>
+								</li>
+						</BOUCLE_cats>
+				          </ul>  	
+		            	
+					
+					
+					<b class="mobile_expand"></b>
+				</div>
+				<div class="tab-content">
+				<BOUCLE_cat2(MOTS){id_groupe=3}>#SET{compt_cat,#COMPTEUR_BOUCLE}
+					<BOUCLE_AfficherArticles(ARTICLES){id_rubrique IN #GET{mes_articles}}{id_mot=#ID_MOT}{par date}{inverse}{id_rubrique!=58}{id_rubrique!=75}{id_rubrique!=76}{id_rubrique!=77}>
+					
+					<div class="simpleTabsContent tab-pane" id="article#ID_ARTICLE">
+						<article class="article-normal">
+							<div class="article-content">
+							#SET{compt_art,#COMPTEUR_BOUCLE}
+							   <header>
+				              <h1>[(#TITRE|supprimer_numero)]</h1>
+				              
+				              <BOUCLEn(MOTS){id_article}{id_mot=4}><span class="new">#TITRE</span></BOUCLEn>
+				              <!--<BOUCLE_new(MOTS){id_groupe=2}{id_article}><span class="new">#TITRE</span></BOUCLE_new>-->
+				              [<h2>(#SOUSTITRE)</h2>]
+				              </header>
+				              [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+				              
+				             <footer>
+				             	<div class="notes">
+					             	<div>
+						             			[(#ENV{lang}|=={en}|oui)#SET{info,'Information request '}]
+						             			[(#ENV{lang}|=={fr}|oui)#SET{info,"Demande d'informations "}]
+						             		<a href="http://7concepts.be/#ENV{lang}/contact/" class="button cta info">#GET{info} &raquo;</a>
+					             	</div>
+						              <BOUCLE_ListePDF(DOCUMENTS){id_article}{extension==pdf}{par num titre}>
+								      		<div>[ <a href="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" class="pdf button clearfix" target="_blank"><span></span>#TITRE</a>]</div>
+								      </BOUCLE_ListePDF>
+								      
+
+								      
+								      <BOUCLE_ListeVid(DOCUMENTS){id_article}{extension==mp4}{par num titre}>
+								      		<div class=" link-all clearfix">
+								      		[ <a class="video_link fancybox" href="#videocontainer#GET{compt_cat}#GET{compt_art}" title="#TITRE">#TITRE</a>
+									      		
+	<div style="display:none">
+	
+									      <div class="video-wrapper ratio-16-9">
+							
+  							
+								<div class="video-container">
+	   	<video id="videocontainer#GET{compt_cat}#GET{compt_art}" class="video-js vjs-default-skin" preload="auto" data-setup="{}" controls >
+	    <source src="#URL_SITE_SPIP/(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" type="video/mp4" />
+	    </video>
+	    </div></div>
+	</div>]
+								      		</div>
+								      		
+		
+								      </BOUCLE_ListeVid>
+								 </div>
+							</footer>
+				            </div>
+			              
+							<div class="gal col2">
+								<!--pic-gallery-->
+								<B_ListeImages>
+								<div class="row clearfix"> 
+							  	<div id="gallery-1" class="royalSlider rsDefault fwImage col span_6">
+							      	
+							      		<BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}>
+							      		[ <a class="rsImg"  data-rsBigImg="[(#FICHIER||extraire_attribut{'src'})]" href="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" alt="#TITRE"><img width="96" height="72" class="rsTmb" src="[(#FICHIER||image_reduire{100}||extraire_attribut{'src'})]" alt="#TITRE"/>[<div class="rsCaption">(#TITRE|supprimer_numero)</div>]</a>]
+							      		
+	
+							      		 </BOUCLE_ListeImages>
+							      	
+							      	
+							  	</div>	
+							  </div>
+								</B_ListeImages>
+								#PS         
+							</div>
+						  
+			            </article>
+			           </div>
+					</BOUCLE_AfficherArticles>
+				</BOUCLE_cat2>
+			</div>
+		</section>

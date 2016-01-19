@@ -1,0 +1,3 @@
+		<BOUCLE_ListeImagesDate(DOCUMENTS){id_article}{extension==jpg|png}{0,1}>
+			<a href="#URL_ARTICLE" title="lire l'article"><img src="[(#FICHIER||image_masque{masque[_(#ENV{taille})].png}||extraire_attribut{'src'})]" alt="#TITRE" class="onglet1" /></a>
+		</BOUCLE_ListeImagesDate>

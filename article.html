@@ -1,0 +1,23 @@
+<BOUCLE_art(ARTICLES){id_article}>
+[(#INCLURE{fond=inc/head}{id_article})]
+<body id="article">
+
+<div id="wrap">
+
+	[(#INCLURE{fond=inc/header}{id_rubrique})]
+
+			<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+			[(#INCLURE{fond=compositions/article[-(#COMPOSITION)]}{id_article}{lang}{env}{ajax})]
+			 </BOUCLE_rub>
+</div>
+
+[(#INCLURE{fond=inc/footer})]
+
+</body>
+</html>
+
+</BOUCLE_art>
+[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''}) 
+<INCLURE{fond=inc/rubrique-login}{id_rubrique}{lang}{env}>
+]
+<//B_art>

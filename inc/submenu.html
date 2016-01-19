@@ -1,0 +1,13 @@
+        <BOUCLE_environ(RUBRIQUES){id_rubrique}>
+		<BOUCLE_ancetre(RUBRIQUES){id_parent=#ID_SECTEUR}{par num titre}>
+		<BOUCLE_test(CONDITION){si #EXPOSE}>
+		<B_ssmenu>
+		<ul id="submenu">
+		<BOUCLE_ssmenu(RUBRIQUES){id_parent}{par num titre}>
+			<li[ class="(#EXPOSE{active})"]><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+		</BOUCLE_ssmenu>
+		</ul>
+		</B_ssmenu>
+		</BOUCLE_test>
+		</BOUCLE_ancetre>
+		</BOUCLE_environ>

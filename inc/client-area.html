@@ -1,0 +1,185 @@
+<BOUCLE_exclure(ARTICLES){id_mot=5}{doublons}></BOUCLE_exclure>
+	
+		<section id="content">
+		
+			       [(#INCLURE{fond=inc/submenu_client}{id_rubrique})]
+			
+			<div id="contenu">
+			<div class="sidebar">
+			
+			
+		
+			<BOUCLE_articleW(ARTICLES){id_rubrique}>
+				<div class="intro">
+				<h3 class="blue">#TITRE[(#ID_RUBRIQUE|=={58}|?{', '#SESSION{prenom} #SESSION{nom},''})].</h3>
+				[(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+				</div>
+				
+				<!--[(#ID_RUBRIQUE|=={58}|?{'',[(#ID_PARENT|=={58}|?{'',[(#INCLURE{fond=inc/back}{env}{id_rubrique})]})]})]-->
+			</BOUCLE_articleW>
+			</div>
+				
+        	<article id="article#ID_RUBRIQUE" class="article-normal">
+	            <div class="article-content">
+		        	<div class="small-content c-ar">
+		        		<section class="profile">
+			        		<header>
+				              <h1>Your account</h1>
+				            </header>
+				            
+				            	<p>#SESSION{name}&nbsp;#SESSION{surname}</p>
+				            	
+				            	<!-- Profil -->
+				            	<p>Company: 
+				            	#SESSION{company}</p>
+				            	
+				            	<p>Country: 
+				            	#SESSION{country}</p>
+				            	
+				            	<!-- end profil -->
+				            	<p>E-mail address: #SESSION{email}</p>
+				            	
+				            	<div class="pull-left"><p><a href="" class="button cta email-btn">Change your e-mail address</a></p></div>
+				            	<div class="pull-left right-btn"><p><a href="" class="button cta pass-btn">Change your password</a></p></div>
+                                <div class="clearfix"></div>
+				            	#FORMULAIRE_FORM_CLIENT_MAIL{#SESSION{id_auteur}}
+				            	#FORMULAIRE_FORM_CLIENT_PASS{#SESSION{id_auteur}}
+				            	
+				            </section>
+			            	<!-- initialisation tableaux données -->
+			            	#SET{my_innov, #ARRAY}
+			            	#SET{my_productions, #ARRAY}
+			            	#SET{my_catalogues, #ARRAY}
+			            	
+			            	
+			            	
+			            	
+			            	<BOUCLE_Arr(RUBRIQUES){id_rubrique}>
+			            	
+				            	<BOUCLE_CPArr(RUBRIQUES){branche}{titre = 'Latest Innovations'}>
+				            	#SET{my_innov, #GET{my_innov}|push{#ID_RUBRIQUE}}
+				            	</BOUCLE_CPArr>
+				            	
+				            	<BOUCLE_clientArr(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+				            	
+				            		<BOUCLE_prodArr(RUBRIQUES){titre like %Productions%}{id_parent=#ID_RUBRIQUE}>
+					            		<BOUCLE_RubProd(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}{inverse}>
+					            			<BOUCLES_moisProd(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+						            			
+						            						#SET{my_productions, #GET{my_productions}|push{#ID_RUBRIQUE}}
+						            			
+						            		</BOUCLES_moisProd>
+						            	</BOUCLE_RubProd>
+					            	</BOUCLE_prodArr>
+					            	
+					            	
+					            	<BOUCLE_innovArr(RUBRIQUES){titre like %Innovations%}{id_parent=#ID_RUBRIQUE}>
+					            		<BOUCLE_RubInnov(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}{inverse}>
+					            			<BOUCLES_moisInnov(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+					            						#SET{my_innov, #GET{my_innov}|push{#ID_RUBRIQUE}}
+					            			</BOUCLES_moisInnov>
+						            	</BOUCLE_RubInnov>
+					            	</BOUCLE_innovArr>
+					            	
+					            	
+				            	</BOUCLE_clientArr>
+				            				            	
+			            	</BOUCLE_Arr>
+	            	
+			            	<!-- end initialisation tableaux données -->
+			            	<BOUCLE_clientProd(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+			            		<BOUCLE_t(RUBRIQUES){titre like %Productions%}{id_parent=#ID_RUBRIQUE}><h1 class="underlined"><a href="#URL_RUBRIQUE">#TITRE</a></h1>
+				            	<BOUCLE_prod(RUBRIQUES){titre = "Current Productions"}{branche}>
+					            	<section class="news clearfix">
+						            	<!-- news -->
+						            	
+						            	<BOUCLE_AfficherProds(ARTICLES){id_rubrique=#ID_RUBRIQUE}{doublons}{0,8}{par num titre}>
+						            		<div class="item-list pull-left">
+						            			
+									      		<BOUCLE_ListeImages2(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}{0,1}>
+									      		<div class="mini-thumb">[ <a href="#URL_ARTICLE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>] </div>  
+									      		 </BOUCLE_ListeImages2>
+											   	
+						            			<div class="item-content">
+						            				<h3><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a> </h3>
+						            				<p>[(#SOUSTITRE)]</p>
+						            				<BOUCLEn(MOTS){id_article}{id_mot=4}><span class="button cta flat">[(#TITRE|supprimer_numero)]</span></BOUCLEn>
+						            				
+						            			</div>
+                                                <div class="link-all r-more">
+						            				<a href="#URL_ARTICLE">Read More &raquo;</a>
+                                                    </div>
+						            		</div>
+						            	</BOUCLE_AfficherProds>
+						            	<!-- end news -->
+						            	
+						            </section>  	
+				            	</BOUCLE_prod>
+					            	<div class="link-all clearfix pull-right;"><a href="#URL_RUBRIQUE">Want more? view all productions</a></div>
+				            	</BOUCLE_t>
+				            </BOUCLE_clientProd>
+				        </div>
+				     
+			        	<div class="big-content c-ar">
+			        		<BOUCLE_clientInnov(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+			            		<BOUCLE_t2(RUBRIQUES){titre like %Innovations%}{id_parent=#ID_RUBRIQUE}><h1 class="underlined"><a href="#URL_RUBRIQUE">#TITRE</a></h1>
+				            	<BOUCLE_innov(RUBRIQUES){titre ="Latest Innovations"}{branche}>
+					        		<section class="current-prod clearfix">      	
+						            	<!-- current products -->
+						            	<BOUCLE_AfficherInnovs(ARTICLES){id_rubrique=#ID_RUBRIQUE}{doublons}{0,8}{par num titre}>
+						            		<div class="item-list pull-left">
+						            		<B_ListeImages>
+									      		<BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}{0,1}>
+									      		<div class="mini-thumb">[ <a href="#URL_ARTICLE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>]</div>
+									      		 </BOUCLE_ListeImages>
+											 </B_ListeImages>     	
+											      	
+						            			<div class="item-content">
+						            				<h3><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a> </h3>
+						            				<p>[(#SOUSTITRE)]</p>
+						            			</div>
+                                                
+                                                   <div class="link-all r-more">
+						            				<a href="#URL_ARTICLE">Read More &raquo;</a>
+                                                    </div> 
+						            		</div>
+						            	</BOUCLE_AfficherInnovs>
+						            	<!-- end current products -->
+					            	</section>    
+			            	       	
+			            	
+				            	</BOUCLE_innov>
+			            	<div class="link-all clearfix"><a href="#URL_RUBRIQUE">Want more? view all innovations</a></div>
+				            	</BOUCLE_t2>
+				            </BOUCLE_clientInnov>
+			            	
+				        	
+				           <!-- <section class="products">-->
+				            	<!-- products -->	
+				            <!--	<h1 class="underlined"><a href="#GET{catUrl}">#GET{catTitle}</a></h1>
+				            	
+				            	<BOUCLE_AfficherProduits(ARTICLES){id_rubrique IN #GET{my_catalogues}}{par date}{inverse}{doublons}>
+				            		<div class="item-list clearfix">
+				            		<B_ListeImages3>
+							      		<BOUCLE_ListeImages3(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}{0,1}>
+							      		<div class="mini-thumb">[ <a href="#URL_ARTICLE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>]</div>
+							      		 </BOUCLE_ListeImages3>
+									 </B_ListeImages3>     	
+									      	
+				            			<div class="item-content"><h3><a href="#URL_RUBRIQUE">#TITRE</a> </h3></div>
+				            		</div>
+				            	</BOUCLE_AfficherProduits>-->
+			            	
+			            	<!-- end products -->
+			           <!-- 	</section>-->
+			           </div> <!-- end right content -->	
+
+					[<footer>
+						<div class="notes">(#NOTES)</div>
+					</footer>]
+	            </div>
+              
+            </article>
+			
+			</div>
+		</section>

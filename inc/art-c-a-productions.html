@@ -1,0 +1,74 @@
+<section id="content-single">
+		
+			[(#INCLURE{fond=inc/subsubmenu_client}{id_rubrique})]
+			
+		    
+			<div id="contenu">
+			<div class="sidebar">
+				<div class="intro">
+					<BOUCLE_environ(RUBRIQUES){id_rubrique}>#SET{id_sousRub, #ID_RUBRIQUE}
+						<BOUCLE_ancetre(RUBRIQUES){id_rubrique=#ID_PARENT}{par num titre}>
+								<a href="#URL_RUBRIQUE#article#GET{id_sousRub}">&laquo; Back to #TITRE</a>
+						</BOUCLE_ancetre>
+					</BOUCLE_environ>
+				</div>
+			</div>		
+				
+			          	           	
+			        	<article class="article-normal" id="article#ID_ARTICLE">
+            	
+					<BOUCLE_afficheArt(ARTICLES){id_article ?}>
+						<div class="article-content">
+			            <header>
+			              <h1>[(#TITRE|supprimer_numero)]</h1>
+			              [<h2>(#SOUSTITRE)</h2>]
+			            </header>
+			            [<div class="chapeau">(#CHAPO)</div>]
+			            
+			            <div class="clearfix"></div>
+			            [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+			             <BOUCLE_ListeVid(DOCUMENTS){id_article}{extension==mp4}{par num titre}>
+									      	<div class=" link-all clearfix">
+									      		[ <a class="video_link fancybox" href="#videocontainer#ID_DOCUMENT" title="#TITRE">#TITRE</a>
+									      		
+												<div style="display:none">
+				
+												      <div id="vid#ID_DOCUMENT" class="video-wrapper ratio-16-9">
+			  							
+														<div class="video-container">
+														   	<video id="videocontainer#ID_DOCUMENT" class="video-js vjs-default-skin" preload="auto" data-setup="{}" controls>
+														    <source src="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" type="video/mp4"/>
+														    </video>
+													    </div>
+													</div>
+												</div>]
+									      	</div>
+									      		
+			
+									      </BOUCLE_ListeVid>
+
+			            <footer><a href="/en/contact/" class="button cta cprod">Contact us »</a></footer>
+						  	</div>
+			           
+					</BOUCLE_afficheArt>
+					<div class="col2">
+						<!--pic-gallery-->
+						<B_ListeImages>
+						<div class="row clearfix"> 
+					  	<div id="gallery-1" class="royalSlider rsDefault fwImage col span_6">
+					      	
+					      		<BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}>
+					      		[ <a class="rsImg"  data-rsBigImg="[(#FICHIER||extraire_attribut{'src'})]" href="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" alt="#TITRE"><img width="96" height="72" class="rsTmb" src="[(#FICHIER||image_reduire{100}||extraire_attribut{'src'})]" alt="#TITRE"/>[<div class="rsCaption">(#TITRE|supprimer_numero)</div>]</a>]
+					      		
+
+					      		 </BOUCLE_ListeImages>
+					      	
+					      	
+					  	</div>	
+					  </div>
+						</B_ListeImages>
+						#PS         
+					</div><!--end col2-->
+				 </article>
+			</div>
+		</section>

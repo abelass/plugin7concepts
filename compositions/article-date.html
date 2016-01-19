@@ -1,0 +1,19 @@
+	<BOUCLE_afficheDesc(ARTICLES){id_article}{par date}{inverse}{lang}>
+    	<article class="article-date">
+        <header>
+          <h1>[(#TITRE|supprimer_numero)]</h1>
+          [<h2>(#SOUSTITRE)</h2>]
+        </header>
+        
+        [<div class="chapeau">(#CHAPO||inserer_attribut{'class','chapeau'})</div>]
+        
+        [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+        
+        <footer>
+        [<div class="note">(#NOTES)</div>]
+        
+        <div class="details">[<span class="day">(#DATE|jour)</span>] [<span class="month">(#DATE|nom_mois)</span>] [<span class="year">(#DATE|annee)</span>]</div>
+        </footer>
+		
+        </article>
+	</BOUCLE_afficheDesc>

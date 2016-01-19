@@ -1,0 +1,42 @@
+    [(#ENV{lang}|=={en}|oui)#SET{products,'products'} #SET{rubProd, 5}]
+	[(#ENV{lang}|=={fr}|oui)#SET{products,'produits'} #SET{rubProd, 6}]
+
+	
+	<div id="principal" class="home">
+		<section id="content">
+			<div id="contenu">
+				<article id="article#ID_ARTICLE" class="article-home">
+				
+	            
+	            <!-- Elastislide Carousel -->
+				<ul id="carousel-home" class="elastislide-list">
+	            <BOUCLE_rubProduits (RUBRIQUES){id_parent=#GET{rubProd}}{par num titre}{lang}>#TITRE
+					<li><a href="#URL_RUBRIQUE">#TITRE</a>
+					<BOUCLE_ListeImages2(DOCUMENTS){id_rubrique}{extension==jpg|png}{par num titre}{0,1}>
+		      		[ <a href="#URL_RUBRIQUE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>]
+		      		 </BOUCLE_ListeImages2>
+					
+					</li>
+	            	
+	            </BOUCLE_rubProduits>
+	            
+	            
+				</ul>
+				 </article>
+				<!-- End Elastislide Carousel -->
+			</div>	
+			
+		</section>
+				    <a href="#GET{products}" id="home_cta" class="button cta large"><:button_discover:></a>
+	</div>
+	
+	[<!--login-form-->
+	(#SESSION{id_auteur}|non)
+	<INCLURE{fond=inc/sidebar-not-logge}{env}{lang}{id_rubrique}>
+	<INCLURE{fond=inc/login}{env}{lang}>
+	]
+	
+	[<!--login-ok-->
+	(#SESSION{id_auteur}|oui)
+	<INCLURE{fond=inc/sidebar-logge}{env}{lang}>
+	]

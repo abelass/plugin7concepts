@@ -1,0 +1,26 @@
+	<div id="principal">
+		<BOUCLE_intro(RUBRIQUES){id_rubrique}>
+		[<div class="introduction">(#TEXTE)</div>]
+		</BOUCLE_intro>
+		<section id="content">
+			<BOUCLE_afficheDesc(ARTICLES){id_rubrique}{par date}{inverse}{lang}>
+    		<article class="article-date" id="article#ID_ARTICLE">
+	        <header>
+	          [<h1>(#TITRE|supprimer_numero)</h1>]
+	          [<h2>(#SOUSTITRE)</h2>]
+	        </header>
+	        
+	        [<a href="#URL_ARTICLE" title="lire l'article">(#LOGO_ARTICLE||image_masque{masque.png}|inserer_attribut{'class','onglet1'}|sinon{[(#INCLURE{fond=inc/miniatures}{id_article})]})</a>]
+	        
+	        [(#CHAPO|sinon{#INTRODUCTION}|paragrapher)]
+	        
+			<footer>
+				<div class="details">[(#DATE|affdate)] <a href="#URL_ARTICLE" class="button"><span><:lire_plus:></span></a></div>
+			</footer>
+			</article>
+			</BOUCLE_afficheDesc>
+	</section>
+    	<aside>
+    		[(#INCLURE{fond=inc/sidebar}{id_rubrique}{lang})]
+    	</aside>
+	</div>

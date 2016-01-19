@@ -1,0 +1,22 @@
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<BOUCLE_testSiArticles(ARTICLES){id_rubrique}{0,1}> </BOUCLE_testSiArticles>
+[(#INCLURE{fond=inc/head}{id_rubrique})]
+<body id="keyword">
+<div id="wrap">
+
+	[(#INCLURE{fond=inc/header}{id_rubrique})]
+	
+	[(#INCLURE{fond=compositions/rubrique[-(#COMPOSITION)]}{id_rubrique}{lang}{env}{ajax})]
+
+</div>
+
+[(#INCLURE{fond=inc/footer}{id_rubrique}{lang})]
+
+</body>
+</html>
+</B_testSiArticles>
+<BOUCLE_premierFils(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}{0,1}>
+<INCLURE{fond=rubrique}{id_rubrique} />
+</BOUCLE_premierFils>
+<//B_testSiArticles>
+</BOUCLE_rub>

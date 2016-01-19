@@ -1,0 +1,41 @@
+		<BOUCLE_afficheArt(ARTICLES){id_article}{par num titre}>
+        	<article class="article-forum" id="article#ID_ARTICLE">
+			<header>
+			<h1>[(#TITRE|supprimer_numero)]</h1>
+			[<h2>(#SOUSTITRE)</h2>]
+			</header>
+			
+			[<div class="chapeau">(#CHAPO)</div>]
+			
+			[(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+			
+			<footer>
+            [<div class="note">(#NOTES)</div>]
+             <div class="details">[<span class="day">(#DATE|jour)</span>] [<span class="month">(#DATE|nom_mois)</span>] [<span class="year">(#DATE|annee)</span>] </div>
+             </footer>
+            </article>
+		</BOUCLE_afficheArt>
+        
+        [(#REM) Forum de l'article ]
+        <div id="article-forum">
+        <a href="forum" name="forum" id="forum"></a>
+        [(#INCLURE{fond=inc/forum}{id_article}{env}{ajax})]
+        [
+        <script type="text/javascript">
+              window.onload = (function(){try{
+                $("#bt-message").click(function () {
+                  if ($("#message").is(":hidden")) {
+                    $("#message").slideDown("slow");
+                  } else {
+                     $("#message").slideUp("slow"); 
+                  }
+                });
+              }catch(e){}});
+        </script>
+        <div style="display:none">(#PARAMETRES_FORUM|url_reponse_forum)</div>
+        <p class="details"><a href="javascript:;" id="bt-message" class="button"><:laisser_commentaire:></a></p>
+        <div id="message" style="display:none" class="ajax">
+        #FORMULAIRE_FORUM
+        </div>
+        ] 
+        </div>

@@ -1,0 +1,36 @@
+
+	<div id="principal">
+		<section id="content">
+		
+			[(#INCLURE{fond=inc/submenu}{id_rubrique})]
+			
+			<div id="contenu">
+			<div class="sidebar"></div>
+			<BOUCLE_afficheArt(ARTICLES){id_rubrique ?}{id_article ?}{par num titre}{lang}>
+        	<article id="article#ID_ARTICLE" class="article-normal">
+              <header>
+              <h1>[(#TITRE|supprimer_numero)]</h1>
+              <BOUCLEn(MOTS){id_article}{id_mot=4}><span class="new">#TITRE</span></BOUCLEn>
+              <!--<BOUCLE_new(MOTS){id_groupe=2}{id_article}><span class="new">#TITRE</span></BOUCLE_new>-->
+              [<h2>(#SOUSTITRE)</h2>]
+              </header>
+              
+              <div class="article-content">
+              [<div class="chapeau">(#CHAPO)</div>]
+              [(#TEXTE|paragrapher|liens_ouvrants)]
+              </div>
+              
+              [<footer>
+              	<div class="notes">(#NOTES)</div>
+              </footer>]
+              
+            </article>
+			</BOUCLE_afficheArt>
+			</div>
+		</section>
+	</div>
+	
+	[<!--login-form-->
+	(#SESSION{id_auteur}|non)
+	<INCLURE{fond=inc/login}{env}{lang}>
+	]

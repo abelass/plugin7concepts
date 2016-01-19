@@ -1,0 +1,30 @@
+[(#INCLURE{fond=inc/head}{id_rubrique})]
+<body id="[(#ID_RUBRIQUE|=={3}|?{homepage,[(#ID_RUBRIQUE|=={4}|?{homepage,section})]})]">
+
+<div id="wrap">
+	[(#INCLURE{fond=inc/header}{id_rubrique}{env})]
+	
+	<div id="principal">
+	<article class="article-normal reponse_formulaire_erreur">
+                    <h3>This section is only available for members.</h3>
+                    <p>Please log in.</p>                
+                </article>
+                
+                #LOGIN_PUBLIC
+ 
+ 		<div class="ask-account">
+		<h3>
+		You don't have any account on our website?
+		<BOUCLE_register1(ARTICLES){id_article=184}>
+		<a href="#URL_ARTICLE" class="spip_mail">Please fill this form</a>
+		</BOUCLE_register1>
+		</h3>
+		</div>
+	</div>
+
+</div>
+[(#INCLURE{fond=inc/footer}{id_rubrique}{lang})]
+
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+	<div id="principal">
+		<BOUCLE_intro(RUBRIQUES){id_rubrique}>
+		[<div class="introduction">(#TEXTE)</div>]
+		</BOUCLE_intro>
+		<section id="content">
+			<BOUCLE_afficheGal(ARTICLES){id_rubrique ?}{id_article ?}{par num titre}{lang}>
+        	<article class="article-galerie" id="article#ID_ARTICLE">
+	            <header>
+	              <h1>[<a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a>]</h1>
+	              [<h2>(#SOUSTITRE)</h2>]
+	            </header>
+	            
+	            [(#CHAPO||inserer_attribut{'class','chapeau'})]
+	            
+	            [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+	              
+	              <B_ListeImages><ol class="gallery">
+	              <BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{doublons}{0,6}>
+	                  <li><a href="[(#FICHIER|image_reduire{600}||extraire_attribut{'src'})]" rel="gallery-#ID_ARTICLE" class="fancybox"><img src="[(#FICHIER|image_masque{masque.png}|extraire_attribut{'src'})]" alt="#TITRE" /></a></li>
+	              </BOUCLE_ListeImages>
+	              </ol>
+	              <div class="clear"> </div>
+	              </B_ListeImages>
+	            
+	            <footer>
+	              [<div class="note">(#NOTES)</div>]
+	           	  <div class="details"><a href="#URL_ARTICLE" class="button"><span><:lire_plus:></span></a></div>
+	            </footer>
+            </article>
+			</BOUCLE_afficheGal>
+		</section>
+    	<aside>
+    		[(#INCLURE{fond=inc/sidebar}{id_rubrique}{lang})]
+    	</aside>
+	</div>

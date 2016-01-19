@@ -1,0 +1,138 @@
+<BOUCLE_exclure(ARTICLES){id_mot=5}{doublons}></BOUCLE_exclure>
+<section id="content" class="c-a-products">
+		
+			[(#INCLURE{fond=inc/subsubmenu}{id_rubrique})]
+			
+		    
+			<div class="simpleTabs">	
+					
+				#SET{mes_articles, #ARRAY}
+			    <div class="tabs"> 	   
+			    	        	
+		            	<BOUCLE_environ(RUBRIQUES){id_rubrique}>#SET{rub,#TITRE}
+		            		
+			            	<BOUCLE_Arr(RUBRIQUES){id_rubrique=#ID_PARENT}>
+								<BOUCLE_test(CONDITION){si #EXPOSE}>
+								
+									<B_ssm>			
+										<BOUCLE_ssm(RUBRIQUES){branche}{par num titre}{titre like %#GET{rub}%}>
+											<BOUCLE_Arr4(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+							            			#SET{mes_articles, #GET{mes_articles}|push{#ID_RUBRIQUE}}
+											</BOUCLE_Arr4>
+											
+										</BOUCLE_ssm>
+									</B_ssm>
+								</BOUCLE_test>
+							</BOUCLE_Arr>
+						</BOUCLE_environ>
+						
+						
+		            	<ul class="by-cat">	
+						<BOUCLE_environ2(RUBRIQUES){id_rubrique}>
+			            	<BOUCLE_Arr2(RUBRIQUES){id_rubrique=#ID_PARENT}>
+			            	[(#REM) ici on est dans la rubrique 58, client Area]
+								<BOUCLE_test2(CONDITION){si #EXPOSE}>
+								
+									<B_ssm2>			
+										<BOUCLE_ssm2(RUBRIQUES){branche}{par num titre}{titre like %#GET{rub}%}>
+										[(#REM) ici on fouille toutes les rubriques "catalogues"]
+											<BOUCLE_Arr3(RUBRIQUES){id_parent=#ID_RUBRIQUE}>[(#REM) ici on est dans les catalogues]
+											<li><span class="open-title">[(#TITRE|supprimer_numero)]<span class="caret"></span></span>
+												<ul class="simpleTabsNavigation">
+												<BOUCLE_AfficherTabs2(ARTICLES){id_rubrique=#ID_RUBRIQUE}{par date}{inverse}{id_rubrique!=58}{id_rubrique!=75}{id_rubrique!=76}{id_rubrique!=77}>
+							            			<li><a href="#" data-toggle="tab" data-target="#article#ID_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+							            			
+							            		</BOUCLE_AfficherTabs2>
+						            		</ul>
+											</BOUCLE_Arr3>
+										
+										</BOUCLE_ssm2>
+									</B_ssm2>
+								</BOUCLE_test2>
+							</BOUCLE_Arr2>
+						</BOUCLE_environ2>
+						</ul>
+						            	
+					
+					
+					<b class="mobile_expand"></b>
+				</div>
+				<div class="tab-content">
+				<BOUCLE_cat2(MOTS){id_groupe=3}>#SET{compt_cat,#COMPTEUR_BOUCLE}
+					<BOUCLE_AfficherRub(RUBRIQUES){id_rubrique IN #GET{mes_articles}}{par date}{inverse}{id_rubrique!=58}{id_rubrique!=75}{id_rubrique!=76}{id_rubrique!=77}>
+						<BOUCLE_AfficherTabs3(ARTICLES){id_rubrique=#ID_RUBRIQUE}{par date}{inverse}{id_rubrique!=58}{id_rubrique!=75}{id_rubrique!=76}{id_rubrique!=77}>
+						<div class="simpleTabsContent tab-pane" id="article#ID_ARTICLE">
+							<article class="article-normal">
+								<div class="article-content">
+								#SET{compt_art,#COMPTEUR_BOUCLE}
+								   <header>
+					              <h1>[(#TITRE|supprimer_numero)]</h1>
+					              
+					              <BOUCLEn(MOTS){id_article}{id_mot=4}><span class="new">#TITRE</span></BOUCLEn>
+					              <!--<BOUCLE_new(MOTS){id_groupe=2}{id_article}><span class="new">#TITRE</span></BOUCLE_new>-->
+					              [<h2>(#SOUSTITRE)</h2>]
+					              </header>
+					              [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+					              
+					             <footer>
+					             	<div class="notes">
+						             	<div>
+							             			[(#ENV{lang}|=={en}|oui)#SET{info,'Information request '}]
+							             			[(#ENV{lang}|=={fr}|oui)#SET{info,"Demande d'informations "}]
+							             		<a href="http://7concepts.be/#ENV{lang}/contact/" class="button cta info">#GET{info} &raquo;</a>
+						             	</div>
+							              <BOUCLE_ListePDF(DOCUMENTS){id_article}{extension==pdf}{par num titre}>
+									      		<div>[ <a href="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" class="pdf button clearfix" target="_blank"><span></span>#TITRE</a>]</div>
+									      </BOUCLE_ListePDF>
+									      
+	
+									      
+									      <BOUCLE_ListeVid(DOCUMENTS){id_article}{extension==mp4}{par num titre}>
+									      		<div class=" link-all clearfix">
+									      		[ <a class="video_link fancybox" href="#videocontainer#GET{compt_cat}#GET{compt_art}" title="#TITRE">#TITRE</a>
+										      		
+		<div style="display:none">
+		
+										      <div class="video-wrapper ratio-16-9">
+								
+	  							
+									<div class="video-container">
+		   	<video id="videocontainer#GET{compt_cat}#GET{compt_art}" class="video-js vjs-default-skin" preload="auto" data-setup="{}" controls >
+		    <source src="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" type="video/mp4" />
+		    </video>
+		    </div></div>
+		</div>]
+									      		</div>
+									      		
+			
+									      </BOUCLE_ListeVid>
+									 </div>
+								</footer>
+					            </div>
+				              
+								<div class="gal col2">
+									<!--pic-gallery-->
+									<B_ListeImages>
+									<div class="row clearfix"> 
+								  	<div id="gallery-1" class="royalSlider rsDefault fwImage col span_6">
+								      	
+								      		<BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}>
+								      		[ <a class="rsImg"  data-rsBigImg="[(#FICHIER||extraire_attribut{'src'})]" href="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" alt="#TITRE"><img width="96" height="72" class="rsTmb" src="[(#FICHIER||image_reduire{100}||extraire_attribut{'src'})]" alt="#TITRE"/>[<div class="rsCaption">(#TITRE|supprimer_numero)</div>]</a>]
+								      		
+		
+								      		 </BOUCLE_ListeImages>
+								      	
+								      	
+								  	</div>	
+								  </div>
+									</B_ListeImages>
+									#PS         
+								</div>
+							  
+				            </article>
+				           </div>
+				         </BOUCLE_AfficherTabs3>
+					</BOUCLE_AfficherRub>
+				</BOUCLE_cat2>
+			</div>
+		</section>

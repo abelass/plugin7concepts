@@ -1,0 +1,38 @@
+[(#INCLURE{fond=inc/head})]
+<body id="search">
+
+<div id="wrap">
+
+	[(#INCLURE{fond=inc/header})]
+	
+	<div id="principal">
+		<section id="content">
+			<!-- Articles trouves -->
+			<B_articlesAA>
+			<article class="article-normal">
+			<header>
+			<h1><:resultats_recherche:></h1>
+			</header>		
+			<dl id="resultats">
+			<BOUCLE_articlesAA(ARTICLES){recherche}{par date}{inverse}>
+				<dt><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></dt>
+				<dd>[(#INTRODUCTION|paragrapher|couper{100})]
+				</dd>
+			</BOUCLE_articlesAA>
+			</dl>
+			</article>
+			</B_articlesAA>
+			<p><:resultats_recherche_pas:></p>
+			<//B_articlesAA>
+		</section>
+    	<aside>
+    		[(#INCLURE{fond=inc/sidebar}{lang})]
+    	</aside>
+	</div>
+
+</div>
+
+[(#INCLURE{fond=inc/footer})]
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+		<BOUCLE_afficheArt(ARTICLES){id_article ?}>
+        	<article class="article-normal" id="article#ID_ARTICLE">
+            <header>
+              <h1>[(#TITRE|supprimer_numero)]</h1>
+              [<h2>(#SOUSTITRE)</h2>]
+            </header>
+            [<div class="chapeau">(#CHAPO)</div>]
+            
+            [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+            
+            [<footer>(#NOTES)</footer>]
+            </article>
+		</BOUCLE_afficheArt>

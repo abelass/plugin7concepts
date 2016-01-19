@@ -1,0 +1,14 @@
+    <footer id="footer">
+    	<div id="footer-credits">
+    		<p>Design, Images, and Products : &copy; Copyright #NOM_SITE_SPIP <!--| <span id="tool-map"><a href="?page=plan"><:plan:></a></span>--> | made by <a href="http://www.spade.be">Spade</a></p>
+    	</div>
+    </footer>
+    [(#SESSION{id_auteur}|oui) 
+		<?php
+		$id_auteur = #SESSION{id_auteur};
+		$n = sql_getfetsel("visites", "spip_auteurs", "id_auteur=$id_auteur");
+		$d = sql_getfetsel("maj", "spip_auteurs", "id_auteur=$id_auteur");
+		$n = $n+1;
+		sql_updateq("spip_auteurs", array("visites" => $n), "id_auteur=$id_auteur") ;
+		echo "<!-- <strong>$id_auteur</strong> -  vues : $n - last : $d-->";		
+		?> ]

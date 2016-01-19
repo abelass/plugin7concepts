@@ -1,0 +1,45 @@
+		<BOUCLE_exclure(ARTICLES){id_mot=5}{doublons}></BOUCLE_exclure>
+				<!-- todo: afficher home-member-block si loggé -->
+				<div id="home-member-block">
+		              <header class="logged-title">
+		              <h1>Hello #SESSION{name}&nbsp;#SESSION{surname},</h1>
+		              <p><:sidebar_begin:></p>
+		              </header>
+		              <div class="home-news-listing">
+			            	
+
+			            	<BOUCLE_NewsArr(RUBRIQUES){titre = "Latest innovations"}>
+			            	<ul id="carousel-side" class="elastislide-list">#TITRE
+                            	<BOUCLE_AfficherArticles(ARTICLES){id_rubrique=#ID_RUBRIQUE}{par date}{inverse}>
+                            
+                            
+                            
+                                    <li class="item-list clearfix">
+                                        <span class="mini-thumb">
+                                        <BOUCLE_ListeImages2(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}{0,1}>
+                                        [ <a href="#URL_ARTICLE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>]
+                                         </BOUCLE_ListeImages2>
+                                        </span>  	
+                                        <span class="item-content">
+                                            <h3><a href="#URL_ARTICLE">#TITRE</a> </h3>
+                                            <p>[(#SOUSTITRE)]</p>
+                                            <BOUCLEn(MOTS){id_article}{id_mot=4}><span class="button cta flat">#TITRE</span></BOUCLEn>                                            
+                                        </span>
+                                            <a href="#URL_ARTICLE" class="button button_small cta">In detail &raquo;</a>
+                                            
+                                    </li>
+                                
+                                
+                                </BOUCLE_AfficherArticles>
+
+			            	</ul>
+							
+			            	</BOUCLE_NewsArr>
+		              	
+	          	      </div>
+	          	      <p><:sidebar_end:></p>
+	          	      <BOUCLE_access(RUBRIQUES){id_rubrique=58}><a href="#URL_RUBRIQUE" class="button cta large" id="home_member_button"><:sidebar_button:></a></BOUCLE_access>
+				</div>
+        	
+    
+    	

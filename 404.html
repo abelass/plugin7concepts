@@ -1,0 +1,71 @@
+[(#INCLURE{fond=inc/head})]
+
+<body id="error">
+
+<div id="wrap">
+    <header id="header">
+        <div id="header-identity">
+        <h1><a href="#URL_SITE_SPIP" title="<:retour:>">#NOM_SITE_SPIP</a></h1>
+        </div>
+        
+        <nav id="header-menu">
+
+			<ul>
+			<B_ancetresHome>
+			<BOUCLE_ancetresHome(RUBRIQUES){par num titre}{doublons}{0,1}>
+			<BOUCLE_environHome(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+			[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
+			</BOUCLE_environHome>
+			</BOUCLE_ancetresHome>
+			</ul>
+		</nav>
+	</header>
+
+	<BOUCLE_environ(RUBRIQUES){id_rubrique}>
+	<BOUCLE_ancetre(RUBRIQUES){id_parent=#ID_SECTEUR}{par num titre}>
+	<BOUCLE_test(CONDITION){si #EXPOSE}>
+	<BOUCLE_ssmenu(RUBRIQUES){id_rubrique}{par num titre}>
+	<h2 class="page_title">[(#TEXTE|sinon{#TITRE}|supprimer_numero|textebrut|liens_ouvrants)]</h2>
+	</BOUCLE_ssmenu>
+	</BOUCLE_test>
+	</BOUCLE_ancetre>
+	</BOUCLE_environ>
+	
+    <b class="mobile_subnav_exp"></b>
+	[<div id="tools" class="clearfix">
+        (#INCLURE{fond=inc/tools}{id_rubrique}{id_article}{env})
+        
+     </div>]
+	
+
+	
+	<div id="principal">
+		<section id="content">
+			<div id="contenu">
+			<!-- Articles trouves -->
+			<article class="article-normal">
+			<header>
+			<h1><:erreur404:></h1>
+			</header>		
+			<p><:erreur404_details:></p>
+			</article>
+			</div>
+		</section>
+	</div>
+	
+	[<!--login-form-->
+	(#SESSION{id_auteur}|non)
+	<INCLURE{fond=inc/login}{env}{lang}>
+	]
+	
+	[<!--login-ok-->
+	(#SESSION{id_auteur}|oui)
+	<INCLURE{fond=inc/sidebar-logge}{env}{lang}>
+	]
+
+</div>
+
+[(#INCLURE{fond=inc/footer})]
+
+</body>
+</html>

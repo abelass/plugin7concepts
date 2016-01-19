@@ -1,0 +1,13 @@
+#SET{test, 'oui'}
+<BOUCLEh(HIERARCHIE){tout}>
+[(#ID_RUBRIQUE|=={58}|?{#SET{test, 'non'},''})]
+	
+</BOUCLEh>
+
+[(#GET{test}|=={'oui'}|oui)
+<INCLURE{fond=inc/rubrique-test}{id_rubrique}{lang}{env}>
+]
+
+[(#GET{test}|=={'non'}|oui)
+<INCLURE{fond=inc/rubrique-client}{id_rubrique}{lang}{env}>
+]

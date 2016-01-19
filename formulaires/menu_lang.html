@@ -1,0 +1,16 @@
+[(#ENV{url}|match{page%3Dlogin}|oui)
+<div class="formulaire_spip formulaire_menu_lang" id="formulaire_menu_lang">
+<form method="post" action="#ENV{url}">
+	[(#ENV{url}|form_hidden)]
+	<label for="#ENV{nom}"><:info_langues:></label>
+	<select name="#ENV{nom}" id="#ENV{nom}" onchange="this.parentNode.submit()">#ENV*{langues}</select>
+	<noscript><input type="submit" class="submit" value="&gt;&gt;" /></noscript>
+</form>
+</div>
+]
+[(#ENV{url}|match{page%3Dlogin}|non)
+	<ul>
+		[(#LANG|=={fr}|oui)<li id="li_en"><a href="#ENV{url}&amp;var_lang=en" rel="alternate" hreflang="en">English</a></li>]
+		[(#LANG|=={en}|oui)<li id="li_fr"><a href="#ENV{url}&amp;var_lang=fr" rel="alternate" hreflang="fr">Français</a></li>]
+	</ul>
+]

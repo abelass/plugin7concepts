@@ -1,0 +1,26 @@
+    <header id="header">
+        <div id="header-identity">
+        <h1><a href="#URL_SITE_SPIP" title="<:retour:>">#NOM_SITE_SPIP</a></h1>
+        </div>
+        
+        [<nav id="header-menu">
+        (#INCLURE{fond=inc/menu}{id_rubrique}{env})
+        </nav>]
+        
+    </header>
+
+	<BOUCLE_environ(RUBRIQUES){id_rubrique}>
+	<BOUCLE_ancetre(RUBRIQUES){id_parent=#ID_SECTEUR}{par num titre}>
+	<BOUCLE_test(CONDITION){si #EXPOSE}>
+	<BOUCLE_ssmenu(RUBRIQUES){id_rubrique}{par num titre}>
+	<h2 class="page_title">[(#TEXTE|sinon{#TITRE}|supprimer_numero|textebrut)]</h2>
+	</BOUCLE_ssmenu>
+	</BOUCLE_test>
+	</BOUCLE_ancetre>
+	</BOUCLE_environ>
+	
+    <b class="mobile_subnav_exp"></b>
+	[<div id="tools">
+        (#INCLURE{fond=inc/tools}{id_rubrique}{id_article}{env})
+        
+     </div>]

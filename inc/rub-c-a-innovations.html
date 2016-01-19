@@ -1,0 +1,74 @@
+<BOUCLE_exclure(ARTICLES){id_mot=5}{doublons}></BOUCLE_exclure>
+<section id="content" class="c-a-products">
+		
+			 [(#INCLURE{fond=inc/submenu_client2}{id_rubrique})]
+			
+		    
+			<div class="simpleTabs">	
+					
+			    <div class="tabs"> 	   
+			    	        	
+		            	
+		            	<ul class="by-cat">	
+							<li>
+								<ul class="simpleTabsNavigation">	
+						<BOUCLE_environ(RUBRIQUES){id_rubrique}>
+								<BOUCLE_test(CONDITION){si #EXPOSE}>								
+									<BOUCLE_Inn(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre='Latest innovations'}{par num titre}>[(#REM) ici on est dans les latest innovations]
+											
+							           <li><a href="#" data-toggle="tab" data-target="#article#ID_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+							            			
+									</BOUCLE_Inn>
+									
+								</BOUCLE_test>
+								<BOUCLE_test2(CONDITION){si #EXPOSE}>								
+									<BOUCLE_Inn3(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre!='Latest innovations'}{par num titre}{inverse}>[(#REM) ici on est dans les mois]
+											
+							           <li><a href="#" data-toggle="tab" data-target="#article#ID_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+							            			
+									</BOUCLE_Inn3>
+									
+								</BOUCLE_test2>
+						</BOUCLE_environ>
+						          </ul>
+						     </li>
+						</ul>						
+						            	
+					
+					
+					<b class="mobile_expand"></b>
+				</div>
+				<div class="tab-content">
+				<BOUCLE_environ2(RUBRIQUES){id_rubrique}>
+					<BOUCLE_Inn2(RUBRIQUES){id_parent=#ID_RUBRIQUE}>
+							<div class="simpleTabsContent tab-pane" id="article#ID_RUBRIQUE">
+								<article class="article-normal">
+									<div class="article-content divided-normal-content">
+									   <header>
+										   	<BOUCLE_head(RUBRIQUES){id_rubrique=#ID_PARENT}{par num titre}{inverse}>
+											   <h1>#TITRE</h1>
+										   </BOUCLE_head>
+									   </header>
+						              	<BOUCLE_AfficherNews(ARTICLES){id_rubrique}{par num titre}{doublons}>
+					            		<div class="item-list">
+					            			<div class="mini-thumb">
+								      		<BOUCLE_ListeImages2(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}{0,1}>
+								      		[ <a href="#URL_ARTICLE"><img src="(#FICHIER|image_masque{masqueBig.png}||extraire_attribut{'src'})" alt="#TITRE"/></a>]
+								      		 </BOUCLE_ListeImages2>
+										    </div>  	
+					            			<div class="item-content">
+					            				<h3><a href="#URL_ARTICLE">#TITRE</a> </h3>
+					            				<p>[(#SOUSTITRE)]</p>
+					            				<a href="#URL_ARTICLE" class="button cta cprod">View product information &raquo;</a><a href="/en/contact/" class="button cta cprod">Contact us &raquo;</a>
+					            			</div>
+					            			<div class="clearfix"></div>
+					            		</div>
+					            		</BOUCLE_AfficherNews>         
+									</div>
+								  
+					            </article>
+					           </div>
+					</BOUCLE_Inn2>
+				</BOUCLE_environ2>
+			</div>
+		</section>

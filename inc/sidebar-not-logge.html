@@ -1,0 +1,15 @@
+
+<div id="home-member-block">
+<BOUCLE_afficheArt(ARTICLES){id_rubrique ?}{id_article ?}{par num titre}{lang}>
+<article id="article#ID_ARTICLE" class="article-home">
+
+  <header class="not-l">
+  	[<h1>(#TITRE|supprimer_numero)</h1>]
+		[<h2>(#SOUSTITRE)</h2>]
+  </header>
+  [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+  
+  [<footer><div class="notes">(#NOTES)</div></footer>]
+</article></BOUCLE_afficheArt>
+
+</div>

@@ -1,0 +1,56 @@
+<section id="content-single">
+		
+			[(#INCLURE{fond=inc/submenu_client_product}{id_rubrique})]
+			
+		    
+			<div id="contenu">
+			<div class="sidebar">
+				<div class="intro">
+					<BOUCLE_environ(RUBRIQUES){id_rubrique}>
+					<BOUCLE_ancetre(RUBRIQUES){id_parent=#ID_SECTEUR}{par num titre}>
+					<BOUCLE_ssmenu2(RUBRIQUES){id_parent}{par num titre}{titre like %Current Productions%}{tout}>
+						<a href="javascript:history.back()">&laquo; Back to #TITRE</a>
+					</BOUCLE_ssmenu2>
+					</BOUCLE_ancetre>
+					</BOUCLE_environ>
+				</div>
+			</div>		
+				
+			          	           	
+			        	<article class="article-normal" id="article#ID_ARTICLE">
+            	
+					<BOUCLE_afficheArt(ARTICLES){id_article ?}>
+						<div class="article-content">
+			            <header>
+			              <h1>[(#TITRE|supprimer_numero)]</h1>
+			              [<h2>(#SOUSTITRE)</h2>]
+			            </header>
+			            [<div class="chapeau">(#CHAPO)</div>]
+			            
+			            [(#TEXTE|paragrapher|image_reduire{660}|liens_ouvrants)]
+			            
+			            <footer><a href="/en/contact/" class="button cta cprod">Contact us »</a></footer>
+						  	</div>
+			           
+					</BOUCLE_afficheArt>
+					<div class="col2">
+						<!--pic-gallery-->
+						<B_ListeImages>
+						<div class="row clearfix"> 
+					  	<div id="gallery-1" class="royalSlider rsDefault fwImage col span_6">
+					      	
+					      		<BOUCLE_ListeImages(DOCUMENTS){id_article}{extension==jpg|png}{par num titre}>
+					      		[ <a class="rsImg"  data-rsBigImg="[(#FICHIER||extraire_attribut{'src'})]" href="(#FICHIER||image_reduire{1000}||extraire_attribut{'src'})" alt="#TITRE"><img width="96" height="72" class="rsTmb" src="[(#FICHIER||image_reduire{100}||extraire_attribut{'src'})]" alt="#TITRE"/>[<div class="rsCaption">(#TITRE)</div>]</a>]
+					      		
+
+					      		 </BOUCLE_ListeImages>
+					      	
+					      	
+					  	</div>	
+					  </div>
+						</B_ListeImages>
+						#PS         
+					</div><!--end col2-->
+				 </article>
+			</div>
+		</section>
