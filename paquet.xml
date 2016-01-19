@@ -2,8 +2,8 @@
 	prefix="sevenconcepts"
 	categorie="outil"
 	version="1.0.0"
-	etat="dev"
-	compatibilite="[3.0.5;3.0.*]"
+	etat="test"
+	compatibilite="[3.0.21;3.0.*]"
 	logo="prive/themes/spip/images/7concepts-64.png"
 	documentation=""
 >
