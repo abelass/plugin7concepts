@@ -2,9 +2,10 @@
 	[(#ENV{lang}|=={fr}|oui)#SET{zone,2}]
 	
 	<ul>
-	[(#SESSION{id_auteur}|oui)[(#INCLURE{fond=inc/client-menu-btn}{id_rubrique}{session}{lang})]]
-	<BOUCLE_ancetres(RUBRIQUES){id_rubrique=125}{par num titre} {si #SESSION{id_auteur}|non}>
+	<BOUCLE_ancetres(RUBRIQUES){id_rubrique=125}{par num titre}{si #SESSION{id_auteur}|non}>
+
 	[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
+	
 	</BOUCLE_ancetres>
 	</B_ancetres>
 	</BOUCLE_environ></ul>

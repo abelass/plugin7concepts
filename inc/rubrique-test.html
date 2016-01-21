@@ -2,7 +2,7 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
 [(#REM) Redirection vers la home]
 [(#COMPOSITION|=={sommaire}|oui)
-	[(#SESSION{id_auteur}|oui)
+	[(#SESSION{id_auteur}|et{#ID_RUBRIQUE|!={58}}|oui)
 		[(#URL_RUBRIQUE{58}|redirige_par_entete)]
 	]
 ]
