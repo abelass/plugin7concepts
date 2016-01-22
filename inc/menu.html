@@ -1,10 +1,11 @@
 <ul>
-<BOUCLE_ancetres(RUBRIQUES){id_rubrique IN 3,58}{par num titre}{si #SESSION{id_auteur}|oui}>
-	[(#ID_RUBRIQUE|=={3}|et{#ENV{id_rubrique}|!={58}}|oui)
+<BOUCLE_connecte(RUBRIQUES){id_rubrique IN 3,58}{par num titre}{si #SESSION{id_auteur}|oui}>
+	[(#ID_RUBRIQUE|=={58}|et{#ENV{id_rubrique}|!={58}}|oui)
 		[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
 	]
-</BOUCLE_ancetres>	
+</BOUCLE_connecte>	
 <BOUCLE_ancetres(RUBRIQUES){id_rubrique IN 3,125}{par num titre}{si #SESSION{id_auteur}|non}>
 	[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
 </BOUCLE_ancetres>
 </ul>
+
