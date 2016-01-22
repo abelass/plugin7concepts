@@ -1,11 +1,5 @@
-	[(#ENV{lang}|=={en}|oui)#SET{zone,1}]
-	[(#ENV{lang}|=={fr}|oui)#SET{zone,2}]
-	
-	<ul>
-	<BOUCLE_ancetres(RUBRIQUES){id_rubrique=125}{par num titre}{si #SESSION{id_auteur}|non}>
-
+<ul>
+<BOUCLE_ancetres(RUBRIQUES){id_rubrique IN 3,125}{par num titre}{si #SESSION{id_auteur}|non}>
 	[<li class="item1[ (#EXPOSE{selected})]" id="menu-item#ID_RUBRIQUE"><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a><span></span></li>]
-	
-	</BOUCLE_ancetres>
-	</B_ancetres>
-	</BOUCLE_environ></ul>
+</BOUCLE_ancetres>
+</ul>
