@@ -41,5 +41,8 @@
 		]
 	<INCLURE{fond=inc/sidebar-not-logge}{env}{lang}{id_rubrique}>
 	<INCLURE{fond=inc/login}{env}{lang}>
-	
+	]
+	[<!--login-ok-->
+	(#SESSION{id_auteur}|oui)
+		<INCLURE{fond=inc/sidebar-logge}{env}{lang}>
 	]
