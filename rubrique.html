@@ -1,4 +1,8 @@
 #SET{test, 'oui'}
+[(#REM) redirection depuis espace client si non connecté]
+[(#ENV{id_rubrique}|=={58}|oui)
+	[(#SESSION{id_auteur}|non)[(#URL_RUBRIQUE{3}|redirige_par_entete)]]
+]
 <BOUCLEh(HIERARCHIE){tout}>
 [(#ID_RUBRIQUE|=={58}|?{#SET{test, 'non'},''})]
 	
